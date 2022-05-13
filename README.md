@@ -1,6 +1,15 @@
 # Radvel_Introduction
 Public repository for helping people to learn radvel
 
+Example code for creating an anaconda environment that uses radvel:
+  conda create --name newrad python=3.6
+  conda activate newrad
+
+  conda install --channel "conda-forge" numpy
+  conda install scipy matplotlib cython astropy pandas
+  pip install corner celerite emcee
+  pip install radvel --upgrade
+  pip install h5py
 
 -------------------------------
 -------   Session 1.    -------
@@ -9,7 +18,7 @@ Public repository for helping people to learn radvel
 1) Installation
 2) Review Fulton et al. 2018
 3) Introduction to RadVel, basic fit
-    - Probably Pegasi 51b. An easy, large amplitude 1 planet fit, not trend, activity, etc.
+    - Probably Pegasi 51b. An easy, large amplitude 1 planet fit, no trend, activity, etc.
 
 
 -------------------------------
@@ -37,7 +46,3 @@ Public repository for helping people to learn radvel
     - Let's introduce the Chromatic GP Kernels from Cale et al. 2021. AU Mic should be our test case here.
 2) More Advanced Radvel
     - Keplerdrive, modifying plots, decorrelation
-
-
-
-

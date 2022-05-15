@@ -2,6 +2,8 @@
 Public repository for helping people to learn radvel
 
 Example code for creating an anaconda environment that uses radvel:
+
+
   conda create --name newrad python=3.6
   conda activate newrad
 

@@ -2,13 +2,20 @@
 Public repository for helping people to learn radvel
 
 Example code for creating an anaconda environment that uses radvel:
+
+
   conda create --name newrad python=3.6
+  
   conda activate newrad
 
   conda install --channel "conda-forge" numpy
+  
   conda install scipy matplotlib cython astropy pandas
+  
   pip install corner celerite emcee
+  
   pip install radvel --upgrade
+  
   pip install h5py
 
 -------------------------------

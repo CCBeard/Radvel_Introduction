@@ -25,22 +25,45 @@ telgrps = data.groupby('tel').groups
 inst = ['APF','HIRES']
 
 #Set Keplerian parameters
-nplanets= #how many planets in this system?
+nplanets=4
 params = radvel.Parameters(nplanets,basis='per tc secosw sesinw k')
 
 #Initial guesses for all parameters.
+#Do not set anything (here or in priors) to exactly zero, code will choke.
 
-params['per1'] = radvel.Parameter(value=, vary=False)
+params['per1'] = radvel.Parameter(value=8.880290, vary=False)
+params['tc1'] = radvel.Parameter(value=2458715.356133, vary=False)
+params['sesinw1'] = radvel.Parameter(value=0.,vary=False) #not allowed
+params['secosw1'] = radvel.Parameter(value=0.,vary=False)
+params['k1'] = radvel.Parameter(value=5.0, vary=True)
 
-##############################################
-# You need to add all the parameters here ####
-##############################################
+params['per2'] = radvel.Parameter(value=28.580507, vary=False)
+params['tc2'] = radvel.Parameter(value=2458726.053366, vary=False)
+params['sesinw2'] = radvel.Parameter(value=0.,vary=False) #not allowed
+params['secosw2'] = radvel.Parameter(value=0.,vary=False)
+params['k2'] = radvel.Parameter(value=5.0, vary=True)
+
+params['per3'] = radvel.Parameter(value=38.352445, vary=False)
+params['tc3'] = radvel.Parameter(value=2458743.551787, vary=False)
+params['sesinw3'] = radvel.Parameter(value=0.,vary=False) #not allowed
+params['secosw3'] = radvel.Parameter(value=0.,vary=False)
+params['k3'] = radvel.Parameter(value=5.0, vary=True)
+
+params['per4'] = radvel.Parameter(value=101.4, vary=True)
+params['tc4'] = radvel.Parameter(value=2459050.0, vary=True)
+params['sesinw4'] = radvel.Parameter(value=0.,vary=False)     #not allowed
+params['secosw4'] = radvel.Parameter(value=0.,vary=False)
+params['k4'] = radvel.Parameter(value=20.0, vary=True)
+
+time_base = np.median(t)
+params['dvdt'] = radvel.Parameter(value=0.0,vary=True)  #allow quadratic trend
+params['curv'] = radvel.Parameter(value=0.0,vary=True)
 
 #Instantiate Model
-model = radvel.model.RVModel(params)
+model = radvel.model.RVModel(params, time_base=time_base)
 
 #Set up instrument-specific parameters and objects
-jit_guesses = #need to add jitter guesses
+jit_guesses = {'APF':1.0, 'HIRES':1.0}
 
 likes = []
 def initialize(tel_suffix):
@@ -65,13 +88,21 @@ rvlike = radvel.likelihood.CompositeLikelihood(likes)
 #Instantiate posterior
 post = radvel.posterior.Posterior(rvlike)
 
-
-##############################################
-# You need to add all the priors here     ####
-##############################################
+#Set priors
 #Planets
-#what priors do we need?
+post.priors += [radvel.prior.HardBounds('per4', 1.0, 1000.0)]
+post.priors += [radvel.prior.HardBounds('tc4', 2459000.0, 2459100.0)]
 
+post.priors += [radvel.prior.HardBounds('dvdt',-1.0, 1.0)]
+post.priors += [radvel.prior.HardBounds('curv',-0.1, 0.1)]
+
+#instrumental
+post.priors += [radvel.prior.HardBounds('jit_APF', 0.5, 10.0)]
+post.priors += [radvel.prior.HardBounds('jit_HIRES', 0.5, 10.0)]
+post.priors += [radvel.prior.HardBounds('gamma_APF', -100., 100.)]
+post.priors += [radvel.prior.HardBounds('gamma_HIRES', -100., 100.)]
+
+freeparameters = 12 #Note for every allowed eccentrity we have 2 free params: e and w
 
 # A sanity check. Do all the numbers look right?
 print(post)

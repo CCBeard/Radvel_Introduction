@@ -11,7 +11,7 @@ from scipy import optimize
 ################################
 
 
-data = pd.read_csv('../Data/Peg_51_rv_hires.csv',sep=' ')
+data = pd.read_csv('../../Data/Peg_51_rv_hires.csv',sep=' ')
 
 t = np.array(data.time)
 vel = np.array(data.mnvel)

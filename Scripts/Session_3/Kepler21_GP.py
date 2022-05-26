@@ -28,10 +28,10 @@ instnames = telgrps.keys()
 #Radvel identifies these by name, so note that each instrument hyperparemters have the same name
 hnames = {
       'hires_post':
-      ['gp_amp',
-      'gp_perlength',
-       'gp_explength',
-        'gp_per'],
+      ['gp_amp', #eta 1
+      'gp_perlength', #eta 4
+       'gp_explength', #eta 2
+        'gp_per'], #eta 3
           'HARPS_N':
           ['gp_amp',
           'gp_perlength',

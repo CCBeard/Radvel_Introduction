@@ -159,6 +159,7 @@ telfmts={'spirou':dict(fmt='o',label='SPIROU',color='gray',markersize=7,markered
 'carmenesnir':dict(fmt='o', label='CARMENES-NIR', color='violet', markersize=7, markeredgecolor='black', mew=1., zorder=1.),
 'hires':dict(fmt='o', label='HIRES', color='dodgerblue', markersize=7, markeredgecolor='black', mew=1., zorder=1.),},
 yscale_sigma=4.,
+saveplot='../../../../Desktop/AU_K2.png'
 )
 GPPlot.plot_multipanel()
 plt.show()

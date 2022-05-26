@@ -135,7 +135,7 @@ post = radvel.fitting.maxlike_fitting(post, verbose=True, method='Nelder-Mead')
 
 nwalk=150 #150 independent walkers
 #Warning, this GP is slow. This might take a while
-#chains = radvel.mcmc(post,nrun=15000,ensembles=3,nwalkers=nwalk, serial=True)
+chains = radvel.mcmc(post,nrun=15000,ensembles=3,nwalkers=nwalk, serial=True)
 
 #print the median posterior estimates
 quants = chains.quantile([0.159, 0.5, 0.841]) # median & 1sigma limits of posterior distribu
